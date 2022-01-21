@@ -1,0 +1,142 @@
+@import '../SCSS/var';
+@import '../SCSS/vendor';
+@import "../SCSS/mixin";
+@import "../SCSS/form";
+// @import "../SCSS/login";
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 300;
+    background-color: $main-color;
+
+}
+
+a,a:hover{
+    text-decoration: none;
+}
+
+.main_header{
+    width:100vw;
+    line-height:10rem;
+    background-color: black;
+
+    & .navbar-brand{
+        color: $text-color;
+        // animation: music 1s linear infinite;
+        // animation-direction: alternate;
+        font-size: 4rem;
+
+        &:hover{
+            filter: drop-shadow(0, 1.5rem 1rem rgba(255, 255, 255, 0.5))
+        }
+    }
+
+    & .fas{
+        font-size: 4rem;
+    }
+    @keyframes music {
+        from{
+            transform: rotate(5deg);
+        }
+        to{
+            transform: rotate(-5deg);
+        }
+    }
+
+    & .navbar-nav{
+        padding-left: 15rem;
+
+        & .nav-item .nav-link{
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            color: $text-color;
+            padding-right: 3rem;
+        }
+
+        & .nav-item:last-child > .nav-link  {
+            padding-right: 0%;
+        }
+    }
+
+    & .nav-item:hover >.nav-link, .navbar-brand.hover, .navbar-brand:hover > .fas{
+        color:$primary-color;
+    }
+    & .my-btn{
+        @include mybtn;
+
+        &:hover{
+            @include hovereffects;
+        }
+    }
+}
+
+.header_hero{
+    width: 100%;
+    height:80vh;
+    background: $main-color;
+
+    &__text{
+        // width: inherit;
+        height: 80vh;
+        // background: black;
+        @include content_center(flex-start);
+
+        & h2{
+            color:$text-color;
+            font-size: 5rem;
+            margin-bottom: 3rem;
+            line-height: 150%;
+            font-weight: 600;
+
+            & span:first-child{
+                color:$primary-color;
+                text-transform: capitalize;
+            }
+        }
+
+        & p{
+            font-size: 1.8rem;
+            color: $text-color;
+            margin-bottom: 2rem;
+        }
+
+        & .header_text__btn{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+
+            & a{
+                @include mybtn;
+                margin-left: 0.7rem;
+                // width: 50rem;
+
+                &:hover{
+                    @include hovereffects
+                }
+            }
+        }
+    
+    }
+    &__img{
+        height: 80vh;
+        @include content_center(flex-end);
+        animation: img 1s linear infinite;
+        animation-direction: alternate;
+
+    }
+    @keyframes img {
+        from{
+            transform: rotate(5deg);
+        }
+        to{
+            transform: rotate(-5deg);
+        }
+    }
+
+
+}
