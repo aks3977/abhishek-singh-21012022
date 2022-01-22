@@ -100,6 +100,11 @@ p{
     display: flex;
     justify-content: center;
 }
+
+.error{
+    color:red;
+    font-weight: bold;
+}
 //media query 
 
 @media only screen and (max-width: 600px) {
