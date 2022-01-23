@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import axios from "axios";
 
 function Form(props) {
   const initialValue = {
@@ -23,8 +24,11 @@ function Form(props) {
   const [passwordError, setPasswordError] = useState(null);
   const [isvalidConfirmPassword, setIsvalidConfirmPassword] = useState(true);
   const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+  const [error, setError] = useState(null);
 
   const { name, username, email, mobile_number, password, confirm_password } = formData;
+
+  const history = useHistory();
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -91,14 +95,40 @@ function Form(props) {
     }
   }, [handleOnChange]);
 
+  const register = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:5000/api/auth/register",{
+      email,
+      password,
+      mobile_number,
+      name,
+      username
+    }).then(response=>{
+      console.log("register response",response);
+      localStorage.setItem("login",
+      JSON.stringify({
+        userLogin: true,
+        token: response.data.access_token,
+      })
+      );
+      setError("");
+      history.push("/dashboard");
+    }).catch(error=>{
+      setError((`${error.response.data.message} !`).toUpperCase());
+    })
+    
+  }
+
+
   return (
     <>
       <div class="signup-form">
-        <form>
+        <form onSubmit={register}>
           <h1>Register</h1>
           <p>Please fill in this form to create an account!</p>
           <hr />
           <div class="form-group">
+            {error && <p className="error">{error}</p>}
             <div class="input-group">
               <span class="input-group-addon">
                 <i class="fa fa-user"></i>
@@ -229,6 +259,7 @@ function Form(props) {
                 required="required"
                 multiple={false}
                 style={{ border: "none" }}
+                required={false}
               />
             </div>
           </div>

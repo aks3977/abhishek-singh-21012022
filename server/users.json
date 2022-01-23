@@ -1,3 +1,30 @@
 {
-    "users": [{ "id": 2, "email": "test@gmail.com", "password": "123456" }]
+    "users": [
+        {
+            "id": 2,
+            "email": "test@gmail.com",
+            "password": "123456"
+        },
+        {
+            "id": 3,
+            "email": "aks@gmail.com",
+            "password": "abhishek_3977"
+        },
+        {
+            "id": 4,
+            "email": "kumar@gmail.com",
+            "password": "kumar123",
+            "mobile_number": "9739921787",
+            "name": "kumar sahab",
+            "username": "kum123"
+        },
+        {
+            "id": 5,
+            "email": "far@gmail.com",
+            "password": "far123",
+            "mobile_number": "9886721787",
+            "name": "farheen ",
+            "username": "far123"
+        }
+    ]
 }
