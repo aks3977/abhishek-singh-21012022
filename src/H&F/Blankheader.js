@@ -1,22 +1,24 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 
 function Blankheader(props) {
   const history = useHistory();
+  const { pathname } = useLocation();
+
   return (
     <>
       <div className="main_header">
         <nav className="navbar navbar-expand-lg">
           <div className="container">
-            <NavLink to={{ pathname: "/" }}>
-              <a className="navbar-brand">
-                <i
-                  class="fas fa-calendar-week"
-                  onClick={() => history.push("/")}
-                ></i>{" "}
-                my todo
-              </a>
-            </NavLink>
+            {/* <NavLink to={{ pathname: "/" }}> */}
+            <a
+              className="navbar-brand"
+              onClick={() => history.push("/")}
+              style={{ color: "white" }}
+            >
+              <i class="fas fa-calendar-week"></i> my todo
+            </a>
+            {/* </NavLink> */}
 
             <button
               className="navbar-toggler"
@@ -53,16 +55,29 @@ function Blankheader(props) {
                 </li>
               </ul> */}
             {/* <form className="d-flex"> */}
-            <NavLink to={{ pathname: "/login" }}>
+            {(history.location.pathname==="/" || history.location.pathname==="/register") ? (
+                <button
+                  className="my-btn"
+                  type="submit"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                  onClick={() => history.push("/login")}
+                >
+                  Sign In
+                </button>
+            ):(
               <button
-                className="my-btn"
-                type="submit"
-                data-toggle="modal"
-                data-target="#exampleModalCenter"
-              >
-                Sign In
-              </button>
-            </NavLink>
+              className="my-btn"
+              type="submit"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+              onClick={() => history.push("/register")}
+            >
+              Register
+            </button>
+
+            )
+            }
             {/* </form> */}
             {/* </div> */}
           </div>
