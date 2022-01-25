@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 function Mainheader(props) {
   const history = useHistory();
+  const location = useLocation();
   const logout = () => {
     localStorage.removeItem("login");
     history.push("/");
@@ -38,12 +39,12 @@ function Mainheader(props) {
             {/* <div className="collapse navbar-collapse" id="navbarSupportedContent"> */}
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="nav-link active" aria-current="page" onClick={()=>history.push("/dashboard")} style={{cursor:"pointer"}}>
                   Dashboard
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" onClick={()=>history.push("/taskmanagement")} style={{cursor:"pointer"}}>
                   Task Management
                 </a>
               </li>

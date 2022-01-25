@@ -4,6 +4,7 @@ import Home from '../container/Home';
 import Login from '../container/Login';
 import Register from '../container/Register';
 import Dashboard from '../container/Dashboard';
+import Taskmanagement from '../container/Taskmanagement';
 
 
 function Approute(props) {
@@ -44,6 +45,7 @@ function Approute(props) {
                 <PublicRoute path="/login" component={Login}/>
                 <PublicRoute path="/register" component={Register}/>
                 <PrivateRoute path="/dashboard" component={Dashboard}/>
+                <PrivateRoute path="/taskmanagement" component={Taskmanagement}/>
             </Switch>
         </div>
     );
