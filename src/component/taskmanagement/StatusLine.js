@@ -1,10 +1,17 @@
 // import "../styles/statusLine.scss";
 import Task from "./Task";
 import React,{useEffect, useState} from 'react';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 
 export default function StatusLine(props) {
-  const { status, tasks, addTask, deleteTask, addEmptyTask, moveTask, backgroundColor, icon } = props;
+  const { status, backgroundColor, icon, tasks, deleteTask, addEmptyTask, addTask } = props;
+  const history = useHistory();
+
+
+  // const [tasks, setTasks] = useState([]);
+
 
   let taskList, tasksForStatus;
 
@@ -24,13 +31,15 @@ export default function StatusLine(props) {
         <Task
           addTask={(task) => addTask(task)}
           deleteTask={(id) => deleteTask(id)}
-          moveTask={(id, status) => moveTask(id, status)}
+          // moveTask={(id, status) => moveTask(id, status)}
           key={task.id}
           task={task}
         />
       );
     });
   }
+  console.log(tasksForStatus && tasksForStatus,"tasksForStatus");
+
 
   return (
     <div className={`statusLine ${backgroundColor}`}>
@@ -41,7 +50,9 @@ export default function StatusLine(props) {
       {taskList}
       {status==="Backlog" &&
       <div className="text-center pb-2">
-      <i class="fa fa-plus-circle fa-3x text-light" onClick={()=>handleAddEmpty()}></i>
+      <i class="fa fa-plus-circle fa-3x text-light"
+       onClick={()=>history.push("/addtask")}
+      ></i>
       {/* // <button onClick={handleAddEmpty} className="button addTask">
       //   +
       // </button> */}

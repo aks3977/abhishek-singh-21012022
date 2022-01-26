@@ -1,36 +1,36 @@
 {
-    "tasks": [
-        {
-            "id": 3,
-            "title": "tssk1",
-            "description": "27th jan,2022",
-            "urgency": "high",
-            "status": "Backlog",
-            "isCollapsed": true
-        },
-        {
-            "id": 4,
-            "title": "task2",
-            "description": "28th jan,2022",
-            "urgency": "medium",
-            "status": "Backlog",
-            "isCollapsed": true
-        },
-        {
-            "id": 5,
-            "title": "task3",
-            "description": "29th jan,2022",
-            "urgency": "medium",
-            "status": "Backlog",
-            "isCollapsed": true
-        },
-        {
-            "id": 6,
-            "title": "task4",
-            "description": "20th jan,2022",
-            "urgency": "high",
-            "status": "Backlog",
-            "isCollapsed": true
-        }
-    ]
+  "tasks": [
+    {
+      "id": 5,
+      "title": "task3",
+      "description": "29th jan,2022",
+      "urgency": "medium",
+      "status": "Backlog",
+      "isCollapsed": true
+    },
+    {
+      "title": "work",
+      "deadline": "26jan",
+      "urgency": "medium",
+      "status": "Backlog",
+      "isCollapsed": "true",
+      "id": 6
+    },
+    {
+      "title": "work4",
+      "deadline": "27th jan",
+      "urgency": "medium",
+      "status": "Backlog",
+      "isCollapsed": "true",
+      "id": 7
+    },
+    {
+      "title": "abhishek",
+      "deadline": "29th jan",
+      "urgency": "low",
+      "status": "Backlog",
+      "isCollapsed": "true",
+      "id": 8
+    }
+  ]
 }

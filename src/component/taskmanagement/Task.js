@@ -4,87 +4,98 @@ import { useState } from "react";
 // import "react-datepicker/dist/react-datepicker.css";
 
 export default function Task(props) {
-  const { addTask, deleteTask, moveTask, task } = props;
+  const {  task, deleteTask } = props;
 
   const [urgencyLevel, setUrgencyLevel] = useState(task.urgency);
   const [collapsed, setCollapsed] = useState(task.isCollapsed);
   const [formAction, setFormAction] = useState("");
   // const [selectedDate,setSelectedDate] = useState(null);
+  
+  // const handleSubmit = (event) => {
+  //   if (formAction === "delete") {
+  //     deleteTask();
+  //   }
+  // }
 
   
+  
 
-  function setUrgency(event) {
-    setUrgencyLevel(event.target.attributes.urgency.value);
-  }
+  // function setUrgency(event) {
+  //   setUrgencyLevel(event.target.attributes.urgency.value);
+  // }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  // function handleSubmit(event) {
+  //   event.preventDefault();
 
-    if (formAction === "save") {
-      if (collapsed) {
-        setCollapsed(false);
-      } else {
-        let newTask = {
-          id: task.id,
-          title: event.target.elements.title.value,
-          // deadline:selectedDate,
-          description: event.target.elements.description.value,
-          urgency: urgencyLevel,
-          status: task.status,
-          isCollapsed: true,
-        };
+  //   if (formAction === "save") {
+  //     if (collapsed) {
+  //       setCollapsed(false);
+  //     } else {
+  //       let newTask = {
+  //         id: task.id,
+  //         title: event.target.elements.title.value,
+  //         // deadline:selectedDate,
+  //         description: event.target.elements.description.value,
+  //         urgency: urgencyLevel,
+  //         status: task.status,
+  //         isCollapsed: true,
+  //       };
 
-        addTask(newTask);
-        setCollapsed(true);
-      }
-    }
+  //       addTask(newTask);
+  //       setCollapsed(true);
+  //     }
+  //   }
 
-    if (formAction === "delete") {
-      deleteTask(task.id);
-    }
-  }
+  //   if (formAction === "delete") {
+  //     deleteTask(task.id);
+  //   }
+  // }
 
-  function handleMoveLeft() {
-    let newStatus = "";
-    if(task.status ==="To Do"){
-      newStatus = "Backlog"
-    }
-    else if (task.status === "In Progress") {
-      newStatus = "To Do";
-    } else if (task.status === "Done") {
-      newStatus = "In Progress";
-    }
+  // function handleMoveLeft() {
+  //   let newStatus = "";
+  //   if(task.status ==="To Do"){
+  //     newStatus = "Backlog"
+  //   }
+  //   else if (task.status === "In Progress") {
+  //     newStatus = "To Do";
+  //   } else if (task.status === "Done") {
+  //     newStatus = "In Progress";
+  //   }
 
-    if (newStatus !== "") {
-      moveTask(task.id, newStatus);
-    }
-  }
+  //   if (newStatus !== "") {
+  //     moveTask(task.id, newStatus);
+  //   }
+  // }
 
-  function handleMoveRight() {
-    let newStatus = "";
+  // function handleMoveRight() {
+  //   let newStatus = "";
 
-    if (task.status === "Backlog") {
-      newStatus = "To Do";
-    } else if (task.status === "To Do") {
-      newStatus = "In Progress";
-    }else if(task.status === "In Progress"){
-      newStatus = "Done"
-    }
+  //   if (task.status === "Backlog") {
+  //     newStatus = "To Do";
+  //   } else if (task.status === "To Do") {
+  //     newStatus = "In Progress";
+  //   }else if(task.status === "In Progress"){
+  //     newStatus = "Done"
+  //   }
 
-    if (newStatus !== "") {
-      moveTask(task.id, newStatus);
-    }
-  }
+  //   if (newStatus !== "") {
+  //     moveTask(task.id, newStatus);
+  //   }
+  // }
 
   return (
     <div className={`task ${collapsed ? "collapsedTask" : ""}`}>
       {collapsed &&
-      <i class="fas fa-chevron-circle-left fa-3x" onClick={()=>handleMoveLeft()}></i>
+      <i class="fas fa-chevron-circle-left fa-3x"
+      //  onClick={()=>handleMoveLeft()}
+       ></i>
       // <button onClick={handleMoveLeft} className="button moveTask">
       //   &#171;
       // </button>
       }
-      <form onSubmit={handleSubmit} className={collapsed ? "collapsed bg-dark px-2" : "bg-dark"}>
+      <form
+      //  onSubmit={handleSubmit} 
+       className={collapsed ? "collapsed bg-dark px-2" : "bg-dark"}>
         <input
           type="text"
           className="title input"
@@ -105,7 +116,7 @@ export default function Task(props) {
           <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
             <input
               urgency="low"
-              onChange={setUrgency}
+              // onChange={setUrgency}
               type="radio"
               name="urgency"
             />
@@ -116,7 +127,7 @@ export default function Task(props) {
           >
             <input
               urgency="medium"
-              onChange={setUrgency}
+              // onChange={setUrgency}
               type="radio"
               name="urgency"
             />
@@ -127,7 +138,7 @@ export default function Task(props) {
           >
             <input
               urgency="high"
-              onChange={setUrgency}
+              // onChange={setUrgency}
               type="radio"
               name="urgency"
             />
@@ -136,7 +147,7 @@ export default function Task(props) {
         </div>
         <button
           onClick={() => {
-            setFormAction("save");
+            // setFormAction("save");
           }}
           className="button"
         >
@@ -145,8 +156,10 @@ export default function Task(props) {
         {collapsed && (
 
           <button
+          // type="submit"
             onClick={() => {
-              setFormAction("delete");
+              deleteTask(task.id);
+              // setFormAction("delete");
             }}
             className="button delete"
           >
@@ -156,7 +169,9 @@ export default function Task(props) {
         )}
       </form>
       {collapsed &&
-      <i class="fas fa-chevron-circle-right fa-3x" onClick={()=>handleMoveRight()}></i>
+      <i class="fas fa-chevron-circle-right fa-3x" 
+      // onClick={()=>handleMoveRight()}
+      ></i>
       // <button onClick={handleMoveRight} className="button moveTask">
       //   &#187;
       // </button>

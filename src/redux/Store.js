@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from "redux";
 import logger from "redux-logger";
 import reduxThunk from "redux-thunk";
-import Rootreducer from "./Root-reducer";
+import Rootreducer from "./Rootreducer";
 
 const middlewares = [reduxThunk];
 

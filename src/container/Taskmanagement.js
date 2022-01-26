@@ -1,89 +1,128 @@
 import React,{useEffect, useState} from 'react';
 import StatusLine from '../component/taskmanagement/StatusLine';
 import Mainheader from '../H&F/Mainheader';
+import {useDispatch, useSelector} from "react-redux"; 
+import { deleteTask, loadTasks, addTask } from '../redux/Actions';
 
 function Taskmanagement(props) {
-    const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-      loadTasksFromLocalStorage();
-    }, []);
+    // const [tasks, setTasks] = useState([]);
+
+    const dispatch = useDispatch();
+
+    let {taskstest} = useSelector(state => state.data);
+    
+
+    useEffect(()=>{
+      dispatch(loadTasks());
+    },[])
+
+    console.log(taskstest);
+
+    const handleDelete = (id) => {
+      dispatch(deleteTask(id))
+    }
+
+
+    // useEffect(() => {
+    //   loadTasksFromLocalStorage();
+    // }, []);
   
     function addEmptyTask(status) {
-      const lastTask = tasks[tasks.length - 1];
+      console.log("add empty");
+      const lastTask = taskstest[taskstest.length - 1];
   
       let newTaskId = 1;
   
       if (lastTask !== undefined) {
         newTaskId = lastTask.id + 1;
       }
+
   
-      setTasks((tasks) => [
-        ...tasks,
-        {
-          id: newTaskId,
-          title: "",
-          // deadline: null,
-          description: "",
-          urgency: "",
-          status: status,
-        },
-      ]);
+
+      // taskstest = taskstest.map((task) => [
+      //   ...task,
+      //   {
+      //     id: newTaskId,
+      //     title: "",
+      //     // deadline: null,
+      //     description: "",
+      //     urgency: "",
+      //     status: status,
+
+      //   }
+      // ]
+
+      // )
+  
+      // taskstest=((taskstest) => [
+      //   ...taskstest,
+      //   {
+      //     id: newTaskId,
+      //     title: "",
+      //     // deadline: null,
+      //     description: "",
+      //     urgency: "",
+      //     status: status,
+      //   },
+      // ]);
     }
   
-    function addTask(taskToAdd) {
-      let filteredTasks = tasks.filter((task) => {
-        return task.id !== taskToAdd.id;
+    function addNewTask(taskToAdd) {
+      let filteredTasks = taskstest.filter((task) => {
+        return taskstest.id !== taskToAdd.id;
       });
   
       let newTaskList = [...filteredTasks, taskToAdd];
   
-      setTasks(newTaskList);
+      taskstest = newTaskList;
+
+      dispatch(addTask(newTaskList))
   
-      saveTasksToLocalStorage(newTaskList);
+      // saveTasksToLocalStorage(newTaskList);
     }
   
-    function deleteTask(taskId) {
-      let filteredTasks = tasks.filter((task) => {
-        return task.id !== taskId;
-      });
+    // function deleteTask(taskId) {
+    //   let filteredTasks = tasks.filter((task) => {
+    //     return task.id !== taskId;
+    //   });
   
-      setTasks(filteredTasks);
+    //   setTasks(filteredTasks);
   
-      saveTasksToLocalStorage(filteredTasks);
-    }
+    //   saveTasksToLocalStorage(filteredTasks);
+    // }
   
-    function moveTask(id, newStatus) {
-      let task = tasks.filter((task) => {
-        return task.id === id;
-      })[0];
+    // function moveTask(id, newStatus) {
+    //   let task = tasks.filter((task) => {
+    //     return task.id === id;
+    //   })[0];
   
-      let filteredTasks = tasks.filter((task) => {
-        return task.id !== id;
-      });
+    //   let filteredTasks = tasks.filter((task) => {
+    //     return task.id !== id;
+    //   });
   
-      task.status = newStatus;
+    //   task.status = newStatus;
   
-      let newTaskList = [...filteredTasks, task];
+    //   let newTaskList = [...filteredTasks, task];
   
-      setTasks(newTaskList);
+    //   setTasks(newTaskList);
   
-      saveTasksToLocalStorage(newTaskList);
-    }
+    //   saveTasksToLocalStorage(newTaskList);
+    // }
   
-    function saveTasksToLocalStorage(tasks) {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
+    // function saveTasksToLocalStorage(tasks) {
+    //   localStorage.setItem("tasks", JSON.stringify(tasks));
+    // }
   
-    function loadTasksFromLocalStorage() {
-      let loadedTasks = localStorage.getItem("tasks");
+    // function loadTasksFromLocalStorage() {
+    //   let loadedTasks = localStorage.getItem("tasks");
   
-      let tasks = JSON.parse(loadedTasks);
+    //   let tasks = JSON.parse(loadedTasks);
   
-      if (tasks) {
-        setTasks(tasks);
-      }
-    }
+    //   if (tasks) {
+    //     setTasks(tasks);
+    //   }
+    // }
   
     return (
         <div>
@@ -95,42 +134,42 @@ function Taskmanagement(props) {
       <main>
         <section>
           <StatusLine
-            tasks={tasks}
+            tasks={taskstest}
             addEmptyTask={addEmptyTask}
-            addTask={addTask}
-            deleteTask={deleteTask}
-            moveTask={moveTask}
+            addTask={addNewTask}
+            deleteTask={handleDelete}
+            // moveTask={moveTask}
             status="Backlog"
             backgroundColor="bg-secondary"
             icon="fa-snowflake"
           />
           <StatusLine
-            tasks={tasks}
+            tasks={taskstest}
             addEmptyTask={addEmptyTask}
-            addTask={addTask}
-            deleteTask={deleteTask}
-            moveTask={moveTask}
+            addTask={addNewTask}
+            deleteTask={handleDelete}
+            // moveTask={moveTask}
             status="To Do"
             backgroundColor="bg-warning"
             icon="fa-book-reader"
           />
 
           <StatusLine
-            tasks={tasks}
+            tasks={taskstest}
             addEmptyTask={addEmptyTask}
-            addTask={addTask}
-            deleteTask={deleteTask}
-            moveTask={moveTask}
+            addTask={addNewTask}
+            deleteTask={handleDelete}
+            // moveTask={moveTask}
             status="In Progress"
             backgroundColor="bg-danger"
             icon="fa-tasks"
           />
           <StatusLine
-            tasks={tasks}
+            tasks={taskstest}
             addEmptyTask={addEmptyTask}
-            addTask={addTask}
-            deleteTask={deleteTask}
-            moveTask={moveTask}
+            addTask={addNewTask}
+            deleteTask={handleDelete}
+            // moveTask={moveTask}
             status="Done"
             backgroundColor="bg-success"
             icon="fa-check-double"

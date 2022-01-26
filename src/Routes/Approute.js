@@ -5,6 +5,7 @@ import Login from '../container/Login';
 import Register from '../container/Register';
 import Dashboard from '../container/Dashboard';
 import Taskmanagement from '../container/Taskmanagement';
+import AddTask from '../component/taskmanagement/AddTask';
 
 
 function Approute(props) {
@@ -46,6 +47,8 @@ function Approute(props) {
                 <PublicRoute path="/register" component={Register}/>
                 <PrivateRoute path="/dashboard" component={Dashboard}/>
                 <PrivateRoute path="/taskmanagement" component={Taskmanagement}/>
+                <PrivateRoute path="/addtask" component={AddTask}/>
+
             </Switch>
         </div>
     );
