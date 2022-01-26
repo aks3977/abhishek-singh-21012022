@@ -75,7 +75,7 @@ export const updateTask = (task, id) => {
         .then((resp)=>{
             console.log("response",resp)
             dispatch(taskUpdated());
-            dispatch(loadTasks);
+            // dispatch(loadTasks);
 
         }).catch((error)=>console.log(error));
     }

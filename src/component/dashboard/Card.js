@@ -10,7 +10,7 @@ function Card(props) {
               <i className={`fa ${props.icon} fa-4x`}></i>
             </div>
             <div className="col">
-              <h3 className="display-3">08</h3>
+              <h3 className="display-3">{props.count}</h3>
             </div>
           </div>
         </div>

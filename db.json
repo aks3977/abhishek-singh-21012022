@@ -1,36 +1,20 @@
 {
   "tasks": [
     {
-      "title": "12334",
-      "deadline": "2 jan",
-      "urgency": "low",
-      "status": "In Progress",
-      "isCollapsed": "true",
-      "id": 15
-    },
-    {
-      "title": "work on edit",
-      "deadline": "28th jan,202",
-      "urgency": "high",
-      "status": "Backlog",
-      "isCollapsed": "true",
-      "id": 16
-    },
-    {
-      "title": "work on move left and right 111",
-      "deadline": "28th jan",
-      "urgency": "high",
-      "status": "Backlog",
-      "isCollapsed": "true",
-      "id": 17
-    },
-    {
-      "title": "aks",
+      "title": "098",
       "deadline": "27th jan",
       "urgency": "medium",
       "status": "Backlog",
       "isCollapsed": "true",
-      "id": 18
+      "id": 23
+    },
+    {
+      "title": "aks",
+      "deadline": "111",
+      "urgency": "medium",
+      "status": "Done",
+      "isCollapsed": "true",
+      "id": 24
     }
   ]
 }

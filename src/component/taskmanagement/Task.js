@@ -3,18 +3,31 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect } from "react/cjs/react.development";
-import { loadTasks } from "../../redux/Actions";
+import { loadTasks, updateTask } from "../../redux/Actions";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
 export default function Task(props) {
   const {  task, deleteTask } = props;
+        const [state, setState] = useState({
+        title:task.title,
+        deadline:task.deadline,
+        urgency:task.urgency,
+        status:task.status,
+        isCollapsed:task.isCollapsed
+    })
+    const {title, deadline, urgency, status, isCollapsed} = state;
+
+    console.log(task);
+
 
   const [urgencyLevel, setUrgencyLevel] = useState(task.urgency);
   const [collapsed, setCollapsed] = useState(task.isCollapsed);
   const [formAction, setFormAction] = useState("");
+  const [newStatus, setNewStatus] = useState("")
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // const [selectedDate,setSelectedDate] = useState(null);
   
@@ -74,27 +87,40 @@ export default function Task(props) {
   //   }
   // }
 
-  // function handleMoveRight() {
-  //   let newStatus = "";
+  const handleMoveRight = () => {
+    if (task.status === "Backlog") {
+      dispatch(updateTask({...state,status:"To Do"},task.id));
 
-  //   if (task.status === "Backlog") {
-  //     newStatus = "To Do";
-  //   } else if (task.status === "To Do") {
-  //     newStatus = "In Progress";
-  //   }else if(task.status === "In Progress"){
-  //     newStatus = "Done"
-  //   }
+    }else if(task.status === "To Do"){
+      dispatch(updateTask({...state,status:"In Progress"},task.id))
 
-  //   if (newStatus !== "") {
-  //     moveTask(task.id, newStatus);
-  //   }
-  // }
+    }else if(task.status === "In Progress"){
+      dispatch(updateTask({...state,status:"Done"},task.id))
+
+    }
+    dispatch(loadTasks())
+  }
+
+  const handleMoveLeft = () => {
+    if (task.status === "Done") {
+      dispatch(updateTask({...state,status:"In Progress"},task.id));
+
+    }else if(task.status === "In Progress"){
+      dispatch(updateTask({...state,status:"To Do"},task.id))
+
+    }else if(task.status === "To Do"){
+      dispatch(updateTask({...state,status:"Backlog"},task.id))
+
+    }
+    dispatch(loadTasks())
+
+  }
 
   return (
     <div className={`task ${collapsed ? "collapsedTask" : ""}`}>
       {collapsed &&
       <i class="fas fa-chevron-circle-left fa-3x"
-      //  onClick={()=>handleMoveLeft()}
+       onClick={()=>handleMoveLeft()}
        ></i>
       // <button onClick={handleMoveLeft} className="button moveTask">
       //   &#171;
@@ -177,9 +203,7 @@ export default function Task(props) {
         )}
       </form>
       {collapsed &&
-      <i class="fas fa-chevron-circle-right fa-3x" 
-      // onClick={()=>handleMoveRight()}
-      ></i>
+      <i class="fas fa-chevron-circle-right fa-3x" onClick={()=>{handleMoveRight()}} style={{cursor:"pointer"}}></i>
       // <button onClick={handleMoveRight} className="button moveTask">
       //   &#187;
       // </button>
