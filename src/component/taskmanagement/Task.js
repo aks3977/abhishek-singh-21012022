@@ -1,5 +1,9 @@
 // import "../styles/task.scss";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect } from "react/cjs/react.development";
+import { loadTasks } from "../../redux/Actions";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -9,6 +13,9 @@ export default function Task(props) {
   const [urgencyLevel, setUrgencyLevel] = useState(task.urgency);
   const [collapsed, setCollapsed] = useState(task.isCollapsed);
   const [formAction, setFormAction] = useState("");
+
+  const history = useHistory();
+
   // const [selectedDate,setSelectedDate] = useState(null);
   
   // const handleSubmit = (event) => {
@@ -151,7 +158,8 @@ export default function Task(props) {
           }}
           className="button"
         >
-          {collapsed ? <i class="fas fa-pencil-alt fa-2x"></i> : "Save"}
+          {collapsed ? <i class="fas fa-pencil-alt fa-2x" 
+          onClick={()=>history.push({pathname:"/edittask",state:{id:task.id}})}></i> : "Save"}
         </button>
         {collapsed && (
 

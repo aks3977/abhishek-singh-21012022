@@ -16,10 +16,18 @@ const taskReducers = (state= initialState, action) => {
             }
         case types.DELETE_TASK:
         case types.ADD_TASK:
+        case types.UPDATE_TASK:
             return{
                 ...state,
                 loading:false
             }
+        case types.GET_SINGLE_TASK:
+            return{
+                ...state,
+                task: action.payload,
+                loading:false
+                }
+    
         default:
             return state;
     }

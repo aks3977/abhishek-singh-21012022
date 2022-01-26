@@ -17,6 +17,7 @@ function Taskmanagement(props) {
       dispatch(loadTasks());
     },[])
 
+
     console.log(taskstest);
 
     const handleDelete = (id) => {

@@ -6,6 +6,8 @@ import Register from '../container/Register';
 import Dashboard from '../container/Dashboard';
 import Taskmanagement from '../container/Taskmanagement';
 import AddTask from '../component/taskmanagement/AddTask';
+import EditTask from '../component/taskmanagement/EditTask';
+
 
 
 function Approute(props) {
@@ -48,7 +50,7 @@ function Approute(props) {
                 <PrivateRoute path="/dashboard" component={Dashboard}/>
                 <PrivateRoute path="/taskmanagement" component={Taskmanagement}/>
                 <PrivateRoute path="/addtask" component={AddTask}/>
-
+                <PrivateRoute path="/edittask" component={EditTask}/>
             </Switch>
         </div>
     );

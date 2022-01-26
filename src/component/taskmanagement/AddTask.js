@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addTask } from '../../redux/Actions';
+import { addTask,loadTasks } from '../../redux/Actions';
 
 
 function AddTask(props) {
@@ -9,7 +9,7 @@ function AddTask(props) {
     const [state, setState] = useState({
         title:"",
         deadline:"",
-        urgency:"low",
+        urgency:"",
         status:"Backlog",
         isCollapsed:"true"
     })
@@ -36,6 +36,7 @@ function AddTask(props) {
         //     setError("please fill all the required input");
         // }else{
             dispatch(addTask(state));
+            dispatch(loadTasks());
             history.push("/taskmanagement");
         // }
     }
@@ -82,10 +83,10 @@ function AddTask(props) {
                             // value={financialYearValue}
                             onChange={handleOnChange}
                             >
-                            <option value="" disabled>
+                            <option value="select priority" disabled selected>
                               Select priority
                             </option>
-                            <option value="low" selected>
+                            <option value="low">
                               Low
                             </option>
                             <option value="medium">Medium</option>
@@ -122,6 +123,10 @@ function AddTask(props) {
           </div>
             {error && <p className='error'>{error}</p>}
           <div class="form-group">
+          <button type='submit'  class="btn btn-primary btn-lg" style={{marginRight:"1rem"}} onClick={()=>history.push("/taskmanagement")}>
+              cancel
+            </button>
+
             {/* {email!="" && password!="" && isvalidEmail===true && isvalidPassword===true ? ( */}
             <button type='submit'  class="btn btn-primary btn-lg">
               create task

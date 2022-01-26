@@ -2,12 +2,20 @@
 import Task from "./Task";
 import React,{useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useDispatch } from "react-redux";
+import { loadTasks } from "../../redux/Actions";
+
 
 
 
 export default function StatusLine(props) {
   const { status, backgroundColor, icon, tasks, deleteTask, addEmptyTask, addTask } = props;
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(loadTasks())
+  },[])
 
 
   // const [tasks, setTasks] = useState([]);
