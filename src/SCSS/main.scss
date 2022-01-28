@@ -8,12 +8,15 @@
 
 html{
     font-size: 62.5%;
+    min-height: 100vh;
+
 }
 
 body{
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 300;
     background-color: $main-color;
+    min-height: 100vh;
 
 }
 

@@ -1,53 +1,41 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { addTask,loadTasks } from '../../redux/Actions';
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { addTask, loadTasks } from "../../redux/Actions";
 
 function AddTask(props) {
+  const [state, setState] = useState({
+    title: "",
+    deadline: "",
+    urgency: "",
+    status: "Backlog",
+    isCollapsed: "true",
+  });
 
-    const [state, setState] = useState({
-        title:"",
-        deadline:"",
-        urgency:"",
-        status:"Backlog",
-        isCollapsed:"true"
-    })
+  const [error, setError] = useState("");
+  const history = useHistory();
 
-    const [error, setError] = useState("");
-    const history = useHistory();
 
-    const {title, deadline, urgency, status, isCollapsed} = state;
-    // const handleOptionChange = (opt) => {
-    //     urgency=opt;
-    //   };
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+    console.log(e.target.value);
+  };
 
-    const handleOnChange = (e) => {
-        const{name, value} = e.target;
-        setState({...state, [name]:value})
-        console.log(e.target.value);
-    }
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addTask(state));
+    dispatch(loadTasks());
+    history.push("/taskmanagement");
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // if(!title || !deadline || !urgency) {
-        //     setError("please fill all the required input");
-        // }else{
-            dispatch(addTask(state));
-            dispatch(loadTasks());
-            history.push("/taskmanagement");
-        // }
-    }
-    
-    return (
-        <div>
-                  <div class="signup-form">
-        <form style={{background:"black"}} onSubmit={handleSubmit}>
-        {/* {error && <p className="error">{error}</p>} */}
-
-          <h1 className='text-light text-center'>Add Task</h1>
+  return (
+    <div>
+      <div class="signup-form">
+        <form style={{ background: "black" }} onSubmit={handleSubmit}>
+          <h1 className="text-light text-center">Add Task</h1>
           <hr />
           <div class="form-group">
             <div class="input-group">
@@ -61,44 +49,32 @@ function AddTask(props) {
                 name="title"
                 placeholder="Enter the title"
                 required="required"
-                // value = {email}
                 onChange={handleOnChange}
               />
             </div>
           </div>
 
-          <div className="form-group" style={{minWidth:"100%"}}>
+          <div className="form-group" style={{ minWidth: "100%" }}>
             <div class="input-group">
-            <span class="input-group-addon">
+              <span class="input-group-addon">
                 <i class="fa fa-user text-light"></i>
               </span>
 
-
-                          <select
-                            class="form-control"
-                            name="urgency"
-                            required="required"
-
-                            // style={{minWidth:"95%"}}
-                            // value={financialYearValue}
-                            onChange={handleOnChange}
-                            >
-                            <option value="select priority" disabled selected>
-                              Select priority
-                            </option>
-                            <option value="low">
-                              Low
-                            </option>
-                            <option value="medium">Medium</option>
-                            <option value="high">
-                              High
-                            </option>
-                          </select>
-                        </div>
-
-            {/* {isvalidEmail === false && <p className="error">{emailError}</p>} */}
-</div>
-
+              <select
+                class="form-control"
+                name="urgency"
+                required="required"
+                onChange={handleOnChange}
+              >
+                <option value="select priority" disabled selected>
+                  Select priority
+                </option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
 
           <div class="form-group">
             <div class="input-group">
@@ -112,38 +88,29 @@ function AddTask(props) {
                 name="deadline"
                 placeholder="Enter the task deadline"
                 required="required"
-                // value = {password}
                 onChange={handleOnChange}
               />
             </div>
-            {/* {isvalidPassword === false && (
-              <p className="error">{passwordError}</p>
-            )} */}
-
           </div>
-            {error && <p className='error'>{error}</p>}
+          {error && <p className="error">{error}</p>}
           <div class="form-group">
-          <button type='submit'  class="btn btn-primary btn-lg" style={{marginRight:"1rem"}} onClick={()=>history.push("/taskmanagement")}>
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              style={{ marginRight: "1rem" }}
+              onClick={() => history.push("/taskmanagement")}
+            >
               cancel
             </button>
 
-            {/* {email!="" && password!="" && isvalidEmail===true && isvalidPassword===true ? ( */}
-            <button type='submit'  class="btn btn-primary btn-lg">
+            <button type="submit" class="btn btn-primary btn-lg">
               create task
             </button>
-            {/* ):( */}
-              {/* <button type="submit" class="btn btn-primary btn-lg" disabled>
-              Sign in
-            </button> */}
-
-            {/* )} */}
           </div>
         </form>
-        {/* <div class="text-center">Already have an account? <a href="#">Login here</a></div> */}
       </div>
-
-        </div>
-    );
+    </div>
+  );
 }
 
 export default AddTask;

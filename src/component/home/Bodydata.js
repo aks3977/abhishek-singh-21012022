@@ -1,5 +1,4 @@
 import React from "react";
-// import musicImage from "../../images/music_image.jpg";
 import { NavLink } from "react-router-dom";
 
 
@@ -26,18 +25,10 @@ function Bodydata() {
                   <a alt="download">
                     Register now
                   </a>
-                  {/* <a href="#" alt="start 30 days free trial">
-                    start 30 days free trial
-                  </a> */}
                 </div>
                 </NavLink>
               </div>
             </div>
-            {/* <div class="col-lg-6 col-10 mx-auto">
-              <figure class="header_hero__img">
-                <img src={musicImage} />
-              </figure>
-            </div> */}
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import axios from "axios";
 function Form(props) {
   const initialValue = {
     name: "",
-    username:"",
+    username: "",
     email: "",
     mobile_number: "",
     password: "",
@@ -26,7 +26,8 @@ function Form(props) {
   const [confirmPasswordError, setConfirmPasswordError] = useState(null);
   const [error, setError] = useState(null);
 
-  const { name, username, email, mobile_number, password, confirm_password } = formData;
+  const { name, username, email, mobile_number, password, confirm_password } =
+    formData;
 
   const history = useHistory();
 
@@ -51,41 +52,32 @@ function Form(props) {
     ) {
       setEmailError("email is invalid !");
       setIsvalidEmail(false);
-    }
-    else if(!/^[a-zA-Z0-9]+$/.test(username) && username!=""){
+    } else if (!/^[a-zA-Z0-9]+$/.test(username) && username != "") {
       setIsvalidUsername(false);
-      setUsernameError("special characters not allowed !")
-    }
-    else if(username.length > 6 && username!=""){
+      setUsernameError("special characters not allowed !");
+    } else if (username.length > 6 && username != "") {
       setIsvalidUsername(false);
-      setUsernameError("username should not exceed more than 6 characters !")
-
-    }
-     else if (name.length < 6 && name != "") {
+      setUsernameError("username should not exceed more than 6 characters !");
+    } else if (name.length < 6 && name != "") {
       setNameError("name must be atleast 6 characters long !");
       setIsvalidName(false);
-    } 
-    else if (!/^[0-9\b]+$/.test(mobile_number) && mobile_number != "") {
+    } else if (!/^[0-9\b]+$/.test(mobile_number) && mobile_number != "") {
       setIsvalidMobile(false);
       setMobileError("mobile number should only contain numbers !");
-    }
-     else if (mobile_number.length < 10 && mobile_number != "") {
+    } else if (mobile_number.length < 10 && mobile_number != "") {
       setIsvalidMobile(false);
       setMobileError("mobile number length should be 10 !");
-    } 
-    else if (password.length < 6 && password != "") {
+    } else if (password.length < 6 && password != "") {
       setIsvalidPassword(false);
       setPasswordError("password must be atleast 6 characters long !");
-    } 
-    else if (
+    } else if (
       confirm_password !== password &&
       confirm_password != "" &&
       password != ""
     ) {
       setIsvalidConfirmPassword(false);
       setConfirmPasswordError("password mismatch !");
-    } 
-    else {
+    } else {
       setIsvalidName(true);
       setIsvalidUsername(true);
       setIsvalidEmail(true);
@@ -97,28 +89,30 @@ function Form(props) {
 
   const register = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/auth/register",{
-      email,
-      password,
-      mobile_number,
-      name,
-      username
-    }).then(response=>{
-      console.log("register response",response);
-      localStorage.setItem("login",
-      JSON.stringify({
-        userLogin: true,
-        token: response.data.access_token,
+    axios
+      .post("http://localhost:5000/api/auth/register", {
+        email,
+        password,
+        mobile_number,
+        name,
+        username,
       })
-      );
-      setError("");
-      history.push("/dashboard");
-    }).catch(error=>{
-      setError((`${error.response.data.message} !`).toUpperCase());
-    })
-    
-  }
-
+      .then((response) => {
+        console.log("register response", response);
+        localStorage.setItem(
+          "login",
+          JSON.stringify({
+            userLogin: true,
+            token: response.data.access_token,
+          })
+        );
+        setError("");
+        history.push("/dashboard");
+      })
+      .catch((error) => {
+        setError(`${error.response.data.message} !`.toUpperCase());
+      });
+  };
 
   return (
     <>
@@ -162,7 +156,9 @@ function Form(props) {
                 onChange={handleOnChange}
               />
             </div>
-            {isvalidUsername === false && <p className="error">{usernameError}</p>}
+            {isvalidUsername === false && (
+              <p className="error">{usernameError}</p>
+            )}
           </div>
 
           <div class="form-group">
@@ -291,7 +287,6 @@ function Form(props) {
             )}
           </div>
         </form>
-        {/* <div class="text-center">Already have an account? <a href="#">Login here</a></div> */}
       </div>
     </>
   );
