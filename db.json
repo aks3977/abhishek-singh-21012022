@@ -1,24 +1,12 @@
 {
   "tasks": [
     {
-      "status": "Done",
-      "id": 1
-    },
-    {
-      "title": "aks",
-      "deadline": "111",
-      "urgency": "low",
-      "status": "Backlog",
-      "isCollapsed": "true",
-      "id": 2
-    },
-    {
-      "title": "aaaaaaaaaaaaaa",
-      "deadline": "12th jan",
+      "title": "work on css",
+      "deadline": "12 th feb",
       "urgency": "medium",
-      "status": "In Progress",
+      "status": "To Do",
       "isCollapsed": "true",
-      "id": 3
+      "id": 7
     }
   ]
 }

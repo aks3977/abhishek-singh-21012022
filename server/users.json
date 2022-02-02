@@ -25,6 +25,14 @@
             "mobile_number": "9886721787",
             "name": "farheen ",
             "username": "far123"
+        },
+        {
+            "id": 6,
+            "email": "test@test.com",
+            "password": "abhi123",
+            "mobile_number": "8217753412",
+            "name": "testtest",
+            "username": "test"
         }
     ]
 }
